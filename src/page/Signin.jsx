@@ -105,10 +105,9 @@ export default function Signin() {
           >
             로그인
           </button>
-
-          <button className="signup-button">
-            <Link to="/signup"> 회원가입</Link>
-          </button>
+          <Link to="/signup">
+            <button className="signup-button"> 회원가입</button>
+          </Link>
         </div>
       </div>
     </div>
