@@ -46,73 +46,73 @@ export default function Signin() {
       console.error("로그인 실패:", error);
       alert("로그인에 실패했습니다.");
     }
+  };
 
-    return (
-      <div className="signin-container">
-        <div className="signin-page-left">
-          <button className="logo-button" onClick={Logo}>
-            BreadCast
-          </button>
-          <div className="left-content">
-            <h2>쉽게 하나로 모여있는 빵맛집 정보</h2>
-            <p>숨은 빵집을 찾아다니는 빵지순례</p>
-            <div className="bread-illustration">
-              <img src={signinImg} alt="BreadCast" className="bread-img" />
-            </div>
-          </div>
-        </div>
-
-        <div className="signin-page-right">
-          <div className="signin-page-right-top">
-            <h1>
-              Sign-in
-              <br />
-              BreadCast
-            </h1>
-            <p>반갑습니다! 로그인하여 참여해보세요</p>
-          </div>
-          <div className="signin-form">
-            <input
-              type="text"
-              value={id}
-              onChange={handleId}
-              placeholder="아이디"
-              className="signin-input"
-            />
-            {id !== "" && !id_valid.test(id) && (
-              <p className="error-message">
-                아이디는 영문+숫자 5~20자여야 합니다.
-              </p>
-            )}
-
-            <input
-              value={pw}
-              onChange={handlePw}
-              type="password"
-              placeholder="비밀번호"
-              className="signin-input"
-            />
-            {pw !== "" && !pw_valid.test(pw) && (
-              <p className="error-message">
-                비밀번호는 영문, 숫자, 특수문자 포함 8~20자여야 합니다.
-              </p>
-            )}
-            <button
-              className="signin-button"
-              disabled={!id_valid.test(id) || !pw_valid.test(pw)}
-              onClick={loginToken}
-            >
-              로그인
-            </button>
-
-            <button className="signup-button">
-              <Link to="/signup"> 회원가입</Link>
-            </button>
+  return (
+    <div className="signin-container">
+      <div className="signin-page-left">
+        <button className="logo-button" onClick={Logo}>
+          BreadCast
+        </button>
+        <div className="left-content">
+          <h2>쉽게 하나로 모여있는 빵맛집 정보</h2>
+          <p>숨은 빵집을 찾아다니는 빵지순례</p>
+          <div className="bread-illustration">
+            <img src={signinImg} alt="BreadCast" className="bread-img" />
           </div>
         </div>
       </div>
-    );
-  };
+
+      <div className="signin-page-right">
+        <div className="signin-page-right-top">
+          <h1>
+            Sign-in
+            <br />
+            BreadCast
+          </h1>
+          <p>반갑습니다! 로그인하여 참여해보세요</p>
+        </div>
+        <div className="signin-form">
+          <input
+            type="text"
+            value={id}
+            onChange={handleId}
+            placeholder="아이디"
+            className="signin-input"
+          />
+          {id !== "" && !id_valid.test(id) && (
+            <p className="error-message">
+              아이디는 영문+숫자 5~20자여야 합니다.
+            </p>
+          )}
+
+          <input
+            value={pw}
+            onChange={handlePw}
+            type="password"
+            placeholder="비밀번호"
+            className="signin-input"
+          />
+          {pw !== "" && !pw_valid.test(pw) && (
+            <p className="error-message">
+              비밀번호는 영문, 숫자, 특수문자 포함 8~20자여야 합니다.
+            </p>
+          )}
+          <button
+            className="signin-button"
+            disabled={!id_valid.test(id) || !pw_valid.test(pw)}
+            onClick={loginToken}
+          >
+            로그인
+          </button>
+
+          <button className="signup-button">
+            <Link to="/signup"> 회원가입</Link>
+          </button>
+        </div>
+      </div>
+    </div>
+  );
 }
 
 /* : api 정보

@@ -173,6 +173,7 @@
   cursor: pointer;
   transition: all 0.2s;
   box-sizing: border-box;
+  text-decoration-line: none;
 }
 
 .signup-button:hover {
