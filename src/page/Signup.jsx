@@ -1,31 +1,60 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import signupImg from "../assets/signup.png";
-
+//  import { useSatate } from "react"; -> 오타!! 주의
 import "./Signup.css";
 
 export default function Signup() {
   const navigate = useNavigate();
-  const [idAvailable, setIdAvailable] = useState(null);
-  const [nicknameAvailable, setNicknameAvailable] = useState(null);
 
   const handleLogo = () => {
     navigate("/");
   };
 
-  const handleIdCheck = () => {
-    // 중복확인 로직
-    console.log("아이디 중복확인");
+  //  상태 관리
+  const [id, setId] = useState("");
+  const handleId = (e) => {
+    setId(e.target.value);
   };
 
-  const handleNicknameCheck = () => {
-    // 중복확인 로직
-    console.log("닉네임 중복확인");
+  const [nickname, setNickname] = useState("");
+  const handleNickname = (e) => {
+    setId(e.target.value);
   };
 
-  const handleSignup = () => {
-    // 회원가입 로직
-    console.log("회원가입");
+  const [pw1, setPw1] = useState("");
+  const handlePw1 = (e) => {
+    setPw(e.target.value);
+  };
+
+  const [pw2, setPw2] = useState("");
+  const handlePw2 = (e) => {
+    setPw(e.target.value);
+  };
+
+  //규칙
+  const id_valid = /^[a-zA-Z0-9]{5,20}$/;
+  const pw1_valid =
+    /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[!@#$%^&*()_+])[A-Za-z\d!@#$%^&*()_+]{8,20}$/;
+
+  // 회원가입 처리 함수
+  const handleSignup = async () => {
+    try {
+      const response = await axios.post(
+        "http://localhost:8080/auth/signup",
+        {
+          LoginId: id,
+          password: pw1,
+          nickname: nickname,
+        },
+        { withCredentials: true }
+      );
+      console.log("로그인 성공:", response.data);
+      navigate("/signin"); //로그인 이동
+    } catch (error) {
+      console.error("로그인 실패:", error);
+      alert("로그인에 실패했습니다.");
+    }
   };
 
   return (
@@ -54,34 +83,45 @@ export default function Signup() {
         <div className="signup-form">
           <div className="input-with-button">
             <input
+              value={id}
+              onChange={handleId}
               type="text"
               placeholder="아이디 (영문+숫자 5~20자)"
               className="signup-input"
             />
-            <button className="check-button" onClick={handleIdCheck}>
-              중복확인
-            </button>
           </div>
-
+          {id !== "" && !id_valid.test(id) && (
+            <p className="error-message">
+              아이디는 영문+숫자 5~20자여야 합니다.
+            </p>
+          )}
           <div className="input-with-button">
-            <input type="text" placeholder="닉네임" className="signup-input" />
-            <button className="check-button" onClick={handleNicknameCheck}>
-              중복확인
-            </button>
+            <input
+              type="text"
+              value={nickname}
+              onChange={handleNickname}
+              placeholder="닉네임"
+              className="signup-input"
+            />
           </div>
-
           <input
             type="password"
             placeholder="비밀번호 : 영문 소+대 특수문자 부호 8~20자로 입력해주세요"
             className="signup-input-full"
           />
-
+          {pw1 !== "" && !pw1_valid.test(id) && (
+            <p className="error-message">
+              아이디는 영문+숫자 5~20자여야 합니다.
+            </p>
+          )}
           <input
             type="password"
             placeholder="비밀번호 재확인"
             className="signup-input-full"
-          />
-
+          />{" "}
+          {pw1 !== "" && pw2 !== "" && pw1 !== pw2 && (
+            <p className="error-message">비밀번호가 일치하지 않습니다.</p>
+          )}
           <button className="signup-button" onClick={handleSignup}>
             회원가입
           </button>
@@ -90,3 +130,14 @@ export default function Signup() {
     </div>
   );
 }
+
+/* : api 정보
+기능	HTTP Method	API 경로
+회원가입하기	POST	/auth/signup
+
+
+loninId	String	private	유저 로그인 ID
+password	String	private	유저 패스워드
+nickname	String	private	유저 닉네임
+*/
+// import { useSatate } from "react"; -> 오타!! 주의

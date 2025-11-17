@@ -94,9 +94,9 @@ export default function Signin() {
             className="signin-input"
           />
           {pw !== "" && !pw_valid.test(pw) && (
-            <p className="error-message">
+            <span className="error-message">
               비밀번호는 영문, 숫자, 특수문자 포함 8~20자여야 합니다.
-            </p>
+            </span>
           )}
           <button
             className="signin-button"
@@ -125,4 +125,8 @@ export default function Signin() {
 1. 로그인하기
 LoginId	String	 로그인 ID
 password	String		패스워드
+*/
+/*
+버튼 중첩 주의
+
 */
