@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import signupImg from "../assets/signup.png";
+import axios from "axios";
 //  import { useSatate } from "react"; -> 오타!! 주의
 import "./Signup.css";
 
@@ -19,26 +20,28 @@ export default function Signup() {
 
   const [nickname, setNickname] = useState("");
   const handleNickname = (e) => {
-    setId(e.target.value);
+    setNickname(e.target.value);
   };
 
   const [pw1, setPw1] = useState("");
   const handlePw1 = (e) => {
-    setPw(e.target.value);
+    setPw1(e.target.value);
   };
 
   const [pw2, setPw2] = useState("");
   const handlePw2 = (e) => {
-    setPw(e.target.value);
+    setPw2(e.target.value);
   };
 
   //규칙
   const id_valid = /^[a-zA-Z0-9]{5,20}$/;
   const pw1_valid =
-    /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[!@#$%^&*()_+])[A-Za-z\d!@#$%^&*()_+]{8,20}$/;
+    /^(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*()_+])[A-Za-z\d!@#$%^&*()_+]{8,20}$/;
 
   // 회원가입 처리 함수
   const handleSignup = async () => {
+    //유효성 검사 안함 : 대신 버튼활성호로 처리
+
     try {
       const response = await axios.post(
         "http://localhost:8080/auth/signup",
@@ -91,9 +94,9 @@ export default function Signup() {
             />
           </div>
           {id !== "" && !id_valid.test(id) && (
-            <p className="error-message">
+            <span className="error-message">
               아이디는 영문+숫자 5~20자여야 합니다.
-            </p>
+            </span>
           )}
           <div className="input-with-button">
             <input
@@ -104,25 +107,41 @@ export default function Signup() {
               className="signup-input"
             />
           </div>
-          <input
-            type="password"
-            placeholder="비밀번호 : 영문 소+대 특수문자 부호 8~20자로 입력해주세요"
-            className="signup-input-full"
-          />
-          {pw1 !== "" && !pw1_valid.test(id) && (
-            <p className="error-message">
-              아이디는 영문+숫자 5~20자여야 합니다.
-            </p>
-          )}
-          <input
-            type="password"
-            placeholder="비밀번호 재확인"
-            className="signup-input-full"
-          />{" "}
-          {pw1 !== "" && pw2 !== "" && pw1 !== pw2 && (
-            <p className="error-message">비밀번호가 일치하지 않습니다.</p>
-          )}
-          <button className="signup-button" onClick={handleSignup}>
+          <div className="input-group">
+            <input
+              value={pw1}
+              onChange={handlePw1}
+              type="password"
+              placeholder="비밀번호 : 영문 소+대 특수문자 부호 8~20자로 입력해주세요"
+              className="signup-input-full"
+            />
+            {pw1 !== "" && !pw1_valid.test(pw1) && (
+              <span className="error-message">
+                비밀번호는 영문 소+대 특수문자 부호 8~20자여야 합니다.
+              </span>
+            )}
+          </div>
+
+          <div className="input-group">
+            <input
+              value={pw2}
+              onChange={handlePw2}
+              type="password"
+              placeholder="비밀번호 재확인"
+              className="signup-input-full"
+            />{" "}
+            {pw1 !== "" && pw2 !== "" && pw1 !== pw2 && (
+              <span className="error-message">
+                비밀번호가 일치하지 않습니다.
+              </span>
+            )}
+          </div>
+
+          <button
+            className="signup-button"
+            onClick={handleSignup}
+            disabled={!id_valid.test(id) || !pw1_valid.test(pw1) || pw1 !== pw2}
+          >
             회원가입
           </button>
         </div>
