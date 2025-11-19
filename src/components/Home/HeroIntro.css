@@ -89,7 +89,7 @@
 }
 
 .hero-section {
-    background-image: url('/HeroIntro.png'); 
+    background-image: url('../../assets/HeroIntro.png'); 
     background-size: cover;
     background-position: center;
     height: 600px; 

@@ -3,6 +3,7 @@
 import React from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
 import './Sidebar.css';
+import logoImg from '../assets/logo.png';
 
 function Sidebar() {
   // 현재 페이지의 URL 정보를 가져옵니다.
@@ -15,7 +16,7 @@ function Sidebar() {
   return (
     <aside className="sidebar">
       <div className="logo">
-        <img src="/logo.png" alt="Breadcast Logo" />
+        <img src={logoImg} alt="Breadcast Logo" />
         <span>BreadCast</span>
       </div>
 

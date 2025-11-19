@@ -3,6 +3,8 @@
 import React from 'react';
 import './HeroIntro.css'; // 전용 스타일 파일 import
 import { Link } from 'react-router-dom'; // 👈 1. 페이지 이동을 위해 Link를 import 합니다.
+import heroLogo from '../../assets/new logo.png';
+import introIcon from '../../assets/Group 300.png';
 
 function HeroIntro() {
   return (
@@ -16,7 +18,7 @@ function HeroIntro() {
         <header className="hero-header">
           <div className="hero-logo">
             <Link to="/">
-              <img src="/new logo.png" alt="BreadCast" />
+              <img src={heroLogo} alt="BreadCast" />
               <span>BreadCast</span>
             </Link>
           </div>
@@ -48,7 +50,7 @@ function HeroIntro() {
         
         <div className="intro-visuals">
           <img 
-            src="/Group 300.png"  
+            src={introIcon}  
             alt="BreadCast 3D 로고와 빵 아이콘" 
             className="intro-icon" 
           />

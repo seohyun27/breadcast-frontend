@@ -2,10 +2,10 @@
 
 import React from 'react';
 
-import HeroIntro from './Home/HeroIntro';
-import FeatureMission from './Home/FeatureMission';
-import ReviewSection from './Home/ReviewSection';
-import Footer from './Home/Footer';
+import HeroIntro from '../components/Home/HeroIntro';
+import FeatureMission from '../components/Home/FeatureMission';
+import ReviewSection from '../components/Home/ReviewSection';
+import Footer from '../components/Home/Footer';
 
 function HomePage() {
   return (
