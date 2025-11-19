@@ -1,9 +1,9 @@
 import React from 'react';
 // 1. react-router-dom에서 Outlet을 꼭 추가로 가져와야 합니다.
 import { Routes, Route, Outlet } from 'react-router-dom'; 
-import Sidebar from './components/Sidebar';   // (유저님이 원래 가지고 있던 파일)
-import Navbar from './components/Navbar';    // (유저님이 원래 가지고 있던 파일)
-import HomePage from './components/HomePage';  // (유저님이 원래 가지고 있던 파일)
+import Sidebar from './pages/Sidebar';
+import Navbar from './pages/Navbar';
+import HomePage from './pages/HomePage';
 import './App.css';
 
 // 2. 임시 페이지들 (이건 원래 코드에도 있었죠)

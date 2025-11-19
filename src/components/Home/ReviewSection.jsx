@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import './ReviewSection.css';
+import homeBannerImg from '../../assets/home1.png';
+import storeImg from '../../assets/store.png';
 
 function ReviewSection() {
   const reviews = [
@@ -50,7 +52,7 @@ function ReviewSection() {
     <section className="review-container">
       {/* 상단 배너 */}
       <div className="review-banner">
-        <img src="/home1.png" alt="맛있는 빵 진열대" />
+        <img src={homeBannerImg} alt="맛있는 빵 진열대" />
         <div className="banner-overlay-text">
           <p>저의 웹사이트를 둘러보세요!</p>
           <p>빵에 진심하여 빵지도를 만들고 고객들의 첫발길을 멈추기 위한 제보 커뮤니티까지!!</p>
@@ -77,7 +79,7 @@ function ReviewSection() {
             </p>
           </div>
           <div className="plan-visual">
-            <img src="/store.png" alt="빵집 위치를 나타내는 아이콘" />
+            <img src={storeImg} alt="빵집 위치를 나타내는 아이콘" />
           </div>
         </div>
       </div>

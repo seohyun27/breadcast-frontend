@@ -1,5 +1,9 @@
 import React from 'react';
 import './FeatureMission.css'; // 전용 CSS 파일을 import 합니다.
+import locationImg from '../../assets/location.png';
+import communityImg from '../../assets/community.png';
+import breadcastImg from '../../assets/breadcast.png';
+import saveImg from '../../assets/save.png';
 
 function FeatureMission() {
   return (
@@ -13,28 +17,28 @@ function FeatureMission() {
         
         {/* 카드 1: 위치기반 */}
         <img 
-          src="/location.png" 
+          src={locationImg} 
           alt="위치기반 기능 설명" 
           className="feature-card-image" 
         />
 
         {/* 카드 2: 제보 커뮤니티 */}
         <img 
-          src="/community.png" 
+          src={communityImg} 
           alt="제보 커뮤니티 기능 설명" 
           className="feature-card-image" 
         />
 
         {/* 카드 3: 빵지순례 */}
         <img 
-          src="/breadcast.png" 
+          src={breadcastImg} 
           alt="빵지순례 기능 설명" 
           className="feature-card-image" 
         />
 
         {/* 카드 4: 저장기록 */}
         <img 
-          src="/save.png" 
+          src={saveImg} 
           alt="저장 기능 설명" 
           className="feature-card-image" 
         />
