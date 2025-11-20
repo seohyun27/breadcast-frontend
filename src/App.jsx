@@ -4,12 +4,12 @@ import { Routes, Route, Outlet } from 'react-router-dom';
 import Sidebar from './pages/Sidebar';
 import Navbar from './pages/Navbar';
 import HomePage from './pages/HomePage';
+import MyPage from './pages/MyPage';
 import './App.css';
 
-// 2. 임시 페이지들 (이건 원래 코드에도 있었죠)
+// 2. 임시 페이지들
 const Search = () => <div className="page-content"><h2>검색 페이지</h2></div>;
 const BakeryTour = () => <div className="page-content"><h2>빵지순례 페이지</h2></div>;
-const MyPage = () => <div className="page-content"><h2>마이페이지</h2></div>;
 
 
 // 3. '사이드바 + 네비바'가 있는 페이지의 "틀"을 여기서 만듭니다.
