@@ -6,6 +6,7 @@ import Navbar from "./pages/Navbar";
 import HomePage from "./pages/HomePage";
 import MyPage from "./pages/MyPage";
 import SearchPage from "./pages/SearchPage";
+import BakeryDetail from "./pages/BakeryDetail";
 import "./App.css";
 
 // 이제 삭제해도 되나?
@@ -56,6 +57,7 @@ function App() {
       */}
       <Route element={<MainLayout />}>
         <Route path="/search" element={<SearchPage />} />
+        <Route path="/bakery/:bakeryId" element={<BakeryDetail />} />
         <Route path="/bakery-tour" element={<BakeryTour />} />
         <Route path="/mypage" element={<MyPage />} />
       </Route>

@@ -1,32 +1,11 @@
-/* 1. 빵집 목록 불러오기
-
-[화면정보]
-구분 : bakery_id
-가게이름 : name
-사진 : photo1
-별점 : rating
-하트 : favorite_count
-리뷰 : review_count
-한줄 소개 : 
-위치 : address
-
-[선택]
-/api/bakeries/{bakeryId}
-*/
-
-/* 
-2. 검색 /api/bakeries
-3. 정렬
-기본 - 좋아요
-좋아요순: favorite_count
-리뷰 순 : review_count
-
-*/
 import React, { useState, useEffect, useRef } from "react";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./SearchPage.css";
 
 export default function SearchPage() {
+  const navigate = useNavigate();
+
   const [list, setList] = useState([]);
   const [loading, setLoading] = useState(false);
   const [keyword, setKeyword] = useState("");
@@ -56,6 +35,7 @@ export default function SearchPage() {
         setList(bakeryList);
       } catch (err) {
         console.error("빵집 목록 불러오기 실패:", err);
+        setList([]);
       } finally {
         setLoading(false);
       }
@@ -80,9 +60,12 @@ export default function SearchPage() {
       setMapError(null);
     };
 
-    if (!import.meta.env.VITE_KAKAO_MAP_KEY) {
+    // 개발 환경에서 카카오맵 API 키가 없으면 에러 메시지 표시
+    const kakaoMapKey = import.meta.env.VITE_KAKAO_MAP_KEY;
+
+    if (!kakaoMapKey) {
       setMapError(
-        ".env 파일에 VITE_KAKAO_MAP_KEY가 설정되어 있는지 확인해주세요."
+        "카카오맵을 사용하려면 .env 파일에 VITE_KAKAO_MAP_KEY를 설정해주세요."
       );
       return;
     }
@@ -102,9 +85,7 @@ export default function SearchPage() {
 
     // 카카오맵 스크립트 동적 로드
     const script = document.createElement("script");
-    const kakaoSdkUrl = `https://dapi.kakao.com/v2/maps/sdk.js?appkey=${
-      import.meta.env.VITE_KAKAO_MAP_KEY
-    }&autoload=false`;
+    const kakaoSdkUrl = `https://dapi.kakao.com/v2/maps/sdk.js?appkey=${kakaoMapKey}&autoload=false`;
     script.src = kakaoSdkUrl;
     script.async = true;
     script.dataset.kakaoMaps = "true";
@@ -199,18 +180,8 @@ export default function SearchPage() {
   const handleBakeryClick = (bakeryId) => {
     console.log("선택된 빵집 ID:", bakeryId);
 
-    // 해당 빵집으로 지도 중심 이동
-    const bakery = list.find((b) => b.bakery_id === bakeryId);
-    if (bakery && bakery.latitude && bakery.longitude && mapInstance.current) {
-      const moveLatLng = new window.kakao.maps.LatLng(
-        bakery.latitude,
-        bakery.longitude
-      );
-      mapInstance.current.setCenter(moveLatLng);
-      mapInstance.current.setLevel(3);
-    }
-
-    // 여기에 라우팅 또는 상세보기 로직 추가
+    // 상세 페이지로 이동
+    navigate(`/bakery/${bakeryId}`);
   };
 
   return (
