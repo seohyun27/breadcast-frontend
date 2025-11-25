@@ -27,12 +27,16 @@ review_count	빵집 리뷰 수
 import React, { useState, useEffect, useRef } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
+import BakeryMenu from "../components/BakeryDetail/BakeryMenu";
+import BakeryReview from "../components/BakeryDetail/BakeryReview";
 import "./BakeryDetail.css";
 
 export default function BakeryDetail() {
   const { bakeryId } = useParams();
   const navigate = useNavigate();
   const [bakery, setBakery] = useState(null);
+  const [menus, setMenus] = useState([]);
+  const [reviews, setReviews] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [activeTab, setActiveTab] = useState("home");
@@ -132,6 +136,33 @@ export default function BakeryDetail() {
   const handleGoBack = () => {
     navigate(-1);
   };
+
+  useEffect(() => {
+    const fetchMenus = async () => {
+      try {
+        const res = await axios.get(`/api/bakeries/${bakeryId}/menus`);
+        const data = res.data?.data ?? res.data;
+        setMenus(Array.isArray(data) ? data : []);
+      } catch (err) {
+        console.error("메뉴 불러오기 실패:", err);
+        setMenus([]);
+      }
+    };
+
+    const fetchReviews = async () => {
+      try {
+        const res = await axios.get(`/api/bakeries/${bakeryId}/bakery-reviews`);
+        const data = res.data?.data ?? res.data;
+        setReviews(Array.isArray(data) ? data : []);
+      } catch (err) {
+        console.error("리뷰 불러오기 실패:", err);
+        setReviews([]);
+      }
+    };
+
+    fetchMenus();
+    fetchReviews();
+  }, [bakeryId]);
 
   // 사진 슬라이드
   const handlePrevPhoto = () => {
@@ -295,13 +326,13 @@ export default function BakeryDetail() {
 
           {activeTab === "menu" && (
             <div className="menu-tab">
-              <p className="empty-message">메뉴 정보가 없습니다.</p>
+              <BakeryMenu menus={menus} />
             </div>
           )}
 
           {activeTab === "review" && (
             <div className="review-tab">
-              <p className="empty-message">리뷰가 없습니다.</p>
+              <BakeryReview reviews={reviews} />
             </div>
           )}
 
