@@ -33,7 +33,7 @@ const MainLayout = () => {
         {/*  <Navbar /> 👈 유저님의 네비바 */}
         {/* 👇 'Outlet'은 '검색', '빵지순례' 페이지 등이 
               표시될 "빈 공간"이라는 뜻입니다. */}
-        <Outlet />
+        <Outlet /> 
       </main>
     </div>
   );
@@ -49,7 +49,7 @@ function App() {
           'MainLayout' (틀) 없이 'HomePage' 컴포넌트만 보여준다.
       */}
       <Route path="/" element={<HomePage />} />
-
+      
       {/* 경로 2:
           '/search', '/bakery-tour' 등 다른 페이지로 접속하면...
           'MainLayout' (틀)을 먼저 보여주고,
